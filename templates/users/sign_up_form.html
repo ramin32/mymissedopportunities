@@ -1,0 +1,39 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<div class="bubble" id="sign_up_form">
+Sign up for your personal MyMissedOpportunites.com account.
+<form action="/users/sign_up/" method="post"  >
+    {% csrf_token %}
+    <fieldset>
+        <legend>Create a username</legend>
+        <table>
+            {% for field in sign_up_form.visible_fields %}
+                {% if forloop.first %}
+                    {% for hidden in form.hidden_fields %}
+                        {{ hidden }}
+                    {% endfor %}
+                {% endif %}
+
+                <tr>
+                    <td class="label_cell">
+                        {{ field.label_tag }}:
+                    </td> 
+                    <td>{{ field }} <span class="errorlist">{{field.errors.as_text}}</span> </td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td/>
+                    <td> <input type="submit" value="Sign Up"/> </td>
+                </td>
+            </tr>
+
+        </table>
+    </fieldset>
+</form>
+</div>
+{% endblock %}
+
+{% block side_content %}
+    {% include 'users/login_form.html' %}
+{% endblock %}

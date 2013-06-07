@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+        <meta name="title" content="MyMissedOpportunities.com: share your missed opportunites with others" />
+        <meta name="description" content="MyMissedOpportunities: It happens to all of us. We are given great opportunites, but for some reason we fail to pursue them. On MyMissedOpportunities.com you get to share that experience with the world. Lets help the world seize the day! One story at a time. Let no great opportunity pass us by! " />
+        <meta name="medium" content="blog" />
+
+        <title>MyMissedOpportunities.com: share your missed opportunites with others</title>
+
+        <link rel="stylesheet" href="/static/css/style.css" />
+
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+         <script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
+        <script type="text/javascript" src="/static/js/index.js"></script>
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-8176639-2']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+             var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+             ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+             })();
+
+         </script>
+
+     </head>
+
+     <body>
+            <div id="user_meta">
+            {% if request.user.is_authenticated %}
+                <span> 
+                    Welcome, <b>{{request.user.username}}</b> |
+                    <a href="/users/{{request.user.id}}/">profile</a> |
+                    <a href="/users/logout/">sign out</a> |
+                    <a href="/users/account/">account</a>
+                </span>
+            {% else %}
+            <span>
+                <a href="/">Login</a> |
+                <a href="/users/sign_up/">Sign Up</a> 
+            </span>
+            {% endif %}
+            </div>
+
+             <div id="header" >
+                 <div id="logo">
+                     <h1><a href="/" id="site_title">MyMissedOpportunities</a></h1>
+		     <h4><i>It happens to all of us.</i></h4>
+                 </div>
+
+                      </div>
+
+             <div id="nav">
+                 <ul>
+                     <li><a href="/" {% ifequal request.path '/' %} class="selected" {% endifequal %}>All</a></li>
+                     <li><a href="/posts/best/" {% ifequal request.path '/posts/best/' %} class="selected" {% endifequal %}><b>Best</b></a></li> 
+                     <li><a href="/posts/worst/" {% ifequal request.path '/posts/worst/' %} class="selected" {% endifequal %}><b>Worst</b></a></li> 
+                     <li><a href="/posts/dating/" {% ifequal request.path '/posts/dating/' %} class="selected" {% endifequal %}>Dating</a></li> 
+                     <li><a href="/posts/school/" {% ifequal request.path '/posts/school/' %} class="selected" {% endifequal %}>School</a></li> 
+                     <li><a href="/posts/work/" {% ifequal request.path '/posts/work/' %} class="selected" {% endifequal %}>Work</a></li> 
+                     <li><a href="/posts/friendship/"{% ifequal request.path '/posts/friendship/' %} class="selected" {% endifequal %}>Friendship</a></li> 
+                     <li><a href="/posts/family/" {% ifequal request.path '/posts/family/' %} class="selected" {% endifequal %}>Family</a></li> 
+                     <li><a href="/posts/other/" {% ifequal request.path '/posts/other/' %} class="selected" {% endifequal %}>Other</a></li> 
+                     {% block submit_link %} {% endblock %}
+                     <li><a href="/about/" {% ifequal request.path '/about/' %} class="selected" {% endifequal %}>About</a></li> 
+                 </ul>
+             </div>
+
+
+         <div id="main">
+
+             {% block main %}
+                 <div id="content">
+                     {% block content %} 
+                     {% endblock %}
+                 </div>
+
+
+                 <div id="side_content" >
+                     {% block side_content %}
+                     {% endblock %}
+                 </div>
+
+             {% endblock main %}
+         </div>
+
+         <div id="footer">
+             <div id="footer_links">
+                 <a href="/feedback/submit_feedback/">Contact Us</a> |
+                 <a href="/terms/">Privacy and Terms of Use</a> |
+                 <a href="/about/">About</a>
+             </div>
+             <div id="copy">
+                 Copyright &copy {% now "Y" %} MyMissedOpportunities
+             </div>
+         </div>
+     </body>
+ </html>

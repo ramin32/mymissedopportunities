@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load pagination_tags %}
+
+{% block submit_link %}
+<li><a href="/" id="submit_link"><b>Sumbit Post</b></a> </li>
+{% endblock %}
+
+{% block content %}
+    {% if flash %}
+    <div id="flash">
+        {{ flash }}
+    </div>
+    {% endif %}
+
+    {% with post_form as form %}
+        <form action="/posts/submit_post/" method="post" class="post_form bubble" style="display:none;">
+            {% include 'form.html' %}
+            <input type="submit" value="Submit Post"/>
+        </form>
+    {% endwith %}
+
+    {% autopaginate post_list 10 %}
+    {% for post in post_list %}
+        {% include 'posts/post.html' %}
+    {% endfor %}
+    {% paginate %}
+{% endblock content %}
+
+{% block side_content %}
+    {% include 'users/login_form.html' %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% csrf_token %}
+{% for field in form.visible_fields %}
+{% if forloop.first %}
+{% for hidden in form.hidden_fields %}
+{{ hidden }}
+{% endfor %}
+{% endif %}
+<tr>
+    <td class="label_cell">{{ field.label_tag }}:</td>
+    <td>{{field}} <span class="errorlist">{{ field.errors.as_text }}</span></td>
+</tr>
+{% endfor %}
+
+

@@ -1,0 +1,39 @@
+{% extends 'base.html'%}
+{% block content %}
+{% if flash %}
+<div class="bubble flash">
+    {{flash}}
+</div>
+{% endif %}
+<div class="bubble" id="account">
+    <fieldset>
+        <legend>Your Account</legend>
+        <table>
+        <form action='/users/change_email/' method="post">
+        <tr>
+            <td class="label_cell">Username:</td>
+            <td> {{user.username}}
+        </tr>
+            {% with email_form as form %}
+            {% include 'table_form.html' %}
+            {% endwith %}
+            <tr>
+                <td/>
+                    <td><input type="submit" value="Change Email"/></td>
+            </tr>
+        </form>
+        <tr><td class="blank_line"/></tr>
+        <form action='/users/change_password/' method="post">
+            {% with password_form as form %}
+            {% include 'table_form.html' %}
+            {% endwith %}
+            <tr>
+                <td/>
+                    <td><input type="submit" value="Change Password"/></td>
+            </tr>
+        </form>
+        </table>
+    </fieldset>
+
+        </div>
+        {% endblock %}

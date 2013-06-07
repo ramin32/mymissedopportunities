@@ -1,0 +1,4 @@
+cd /home/mmo_user/mymissedopportunities/
+source bin/activate
+python2 manage.py run_gunicorn -b unix:/tmp/gunicorn_mmo.sock -w 4 -D --log-file=/tmp/mmo.log 
+deactivate

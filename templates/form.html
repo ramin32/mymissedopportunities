@@ -1,0 +1,17 @@
+<div class="dynamic_part">
+    {% csrf_token %}
+    <ul>
+        {% for field in form.visible_fields %}
+            {% if forloop.first %}
+                {% for hidden in form.hidden_fields %}
+                    {{ hidden }}
+                {% endfor %}
+            {% endif %}
+            <li>{{ field.label_tag }}:</li>
+            <li>{{field}}</li> 
+            <li>{{ field.errors }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+

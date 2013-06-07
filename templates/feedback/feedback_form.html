@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block main %}
+
+<div class="bubble">
+<h3>We welcome any feedback, comments or questions!</h3>
+<form action="/feedback/submit_feedback/" method="post" id="feedback_form">
+    {% include 'form.html' %}
+    <input type="submit" value="Submit" />
+</form>
+</div>
+{% endblock main %}

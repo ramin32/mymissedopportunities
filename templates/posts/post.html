@@ -1,0 +1,46 @@
+<div class="bubble wordwrap">
+    <div class="post">
+        <div class="missed_opportunity">
+            {{ post.missed_opportunity }}
+        </div>
+    </div>
+    <div class='post_meta'>
+        #{{ post.id }} -
+        <span>
+            <a href="/posts/{{ post.id }}/up_votes/add/" class="active_link vote_link">I like it</a>  
+            (<span class="votes">{{ post.up_votes }}</span>) -
+        </span>
+        <span>
+            <a href="/posts/{{ post.id }}/down_votes/add/" class="active_link vote_link">I don't like it</a>  
+            (<span class="votes">{{ post.down_votes }}</span>) -
+        </span>
+        {% if post.user %}
+        <a href="/users/{{ post.user_id }}/">{{post.get_username}}</a> -
+        {% else %}
+            {{ post.get_username }} -
+        {% endif %}
+        {{ post.date_created }} -
+        <a href="/index/{{ post.category }}/" class="active_link">{{ post.category|capfirst}}</a> 
+
+        <div class="comments">
+            <hr/>
+            <a href="" class="comment_link">add comment</a>
+
+            {% with comment_form as form %}
+                <form action="/posts/{{post.id}}/comment/" method="post" class="comment_form" style="display:none;">
+                    {% include 'form.html' %}
+                    <input type="submit" value="Add Comment"/>
+                </form>
+            {% endwith %}
+
+            {% for comment in post.comment_set.all %}
+                {% if not comment.is_spam %}
+                    {% include 'posts/comment.html' %}	
+                {% endif %}
+            {% endfor %}
+        </div>
+
+
+    </div>
+</div>
+
